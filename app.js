@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var path = require("path");
 
 var app = express();
+var port = process.env.PORT || 3000;
 var server = require('http').Server(app);
 
 //view engine
@@ -58,7 +59,7 @@ io.sockets.on('connection', function(socket, pseudo){
 
 });
 
-server.listen(3000);
+server.listen(port);
 
 /*var http = require("http");
 var fs = require('fs');
