@@ -2,8 +2,9 @@
   "name": "expressjs",
   "version": "1.0.0",
   "description": "my first app in node with express",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
+    "start": "node 6.11.4",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yanick007",
