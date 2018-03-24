@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+  <body>
+
+     <!--<div class="container">
+
+        <p id="notifs"></p>
+        <form class="" action="" method="">
+
+           <input type="text" name="" placeholder="Type your massage..." id="msg">
+           <input type="submit" name="" value="Send" id="send">
+
+        </form>
+
+        <div class="msgContainer">
+
+        </div>
+
+     </div>-->
+
+
+     <div class="iotCore">
+
+       <!--<img src="img/img1.jpeg" alt="">
+       <img src="img/img2.jpeg" alt="">
+       <img src="img/img3.jpeg" alt="">
+       <img src="img/img4.jpeg" alt="">
+       <img src="img/img5.jpeg" alt="">
+       <img src="img/img6.jpeg" alt="">
+       <img src="img/img7.jpeg" alt="">
+       <img src="img/img8.jpeg" alt="">
+       <img src="img/img9.jpeg" alt="">
+       <img src="img/img10.jpeg" alt="">-->
+
+     </div>
+
+     <style media="screen">
+
+         html, body{
+
+            padding: 0px;
+            margin: 0px;
+
+         }
+
+         /**************************************************/
+
+
+         .iotCore
+         {
+
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(img/img1.jpeg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+
+         }
+
+
+         .iotCore img
+         {
+
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            position: absolute;
+
+         }
+
+         /****************************************************/
+
+
+         .container
+         {
+
+             width: 100%;
+             height: auto;
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+
+         }
+
+
+         .container form
+         {
+
+           width: auto;
+           height: auto;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           margin-top: 100px;
+
+         }
+
+
+         .container form #msg
+         {
+
+            width: 500px;
+            height: 30px;
+            border: 1px solid gray;
+            border-radius: 3px;
+            padding-left: 15px;
+            text-align: left;
+            font-size: 16px;
+
+         }
+
+
+         .container form #send
+         {
+
+             width: auto;
+             height: 33px;
+             padding-left: 10px;
+             padding-right: 10px;
+             border: 1px solid green;
+             border-radius: 3px;
+             background-color: green;
+             color:white;
+             cursor: pointer;
+             margin-left: 10px;
+
+         }
+
+     </style>
+
+     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+     <script src="/socket.io/socket.io.js"></script>
+     <script>
+        let socket = io.connect("http://localhost:3000");
+
+        //let username = prompt('quel est ton nom');
+        //let notif = document.getElementById('notifs').innerHTML = 'Welcom in the super chat '+username;
+
+      /*  socket.emit('newuser', username);
+        socket.on('newUser', function(username){
+
+           console.log(username+" vient de se connecter");
+
+        })*/
+
+        //let send = document.getElementById('send');
+        /*send.addEventListener('click', function(e){
+
+           e.preventDefault();
+           let msg = document.getElementById('msg').value;
+           displayMsg(username, msg);
+           socket.emit('msg',msg);
+
+           $("#msg").val('').focus();
+
+        })
+
+        socket.on('msgs', function(data){
+
+           displayMsg(data.pseudo, data.msg);
+
+        })
+
+
+        function displayMsg(pseudo, msg)
+        {
+
+           let msgContainer = document.querySelector(".msgContainer");
+
+           let msgPseudoCont = document.createElement('div');
+           msgPseudoCont.className = 'msgPseudoCont';
+
+           let pseudoCont = document.createElement('h4');
+           pseudoCont.textContent = pseudo;
+
+           let msgCont = document.createElement('p');
+           msgCont.textContent = msg;
+
+           msgPseudoCont.appendChild(pseudoCont);
+           msgPseudoCont.appendChild(msgCont);
+
+           msgContainer.appendChild(msgPseudoCont);
+
+        }*/
+
+        ////////******************************************////////////
+        ///////////// IOT CADRE*************************************///
+
+        var imgArr = ['img2.jpeg', 'img3.jpeg', 'img4.jpeg', 'img5.jpeg', 'img6.jpeg', 'img7.jpeg', 'img8.jpeg', 'img9.jpeg','img10.jpeg'];
+        var counter = "<?php echo $counter['counter'];?>";
+        var iotCore = document.querySelector(".iotCore");
+        var path = "../public/img/";
+        var counter = 1;
+
+        window.addEventListener('click', function(){
+
+          counter += 1;
+          var curImg = imgArr[counter];
+          socket.emit('sendImgSrc', curImg);
+
+          socket.on('broadcastImg', function(url){
+
+            displayImg(url);
+
+          })
+
+
+          function displayImg(url)
+          {
+
+             iotCore.style.backgroundImage = "url(img/"+url+")";
+
+          }
+
+          /*}*/
+
+          if(counter > 10)
+          {
+
+             counter = 0;
+
+          }
+          console.log(counter);
+
+        })
+
+     </script>
+
+  </body>
+
+</html>

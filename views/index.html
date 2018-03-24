@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+
+  <body>
+
+     <h2>CONNECTION AVEC SOCKET.IO via websocket</h2>
+     <script src="/socket.io/socket.io.js"></script>
+     <script>
+        let socket = io.connect("http://localhost:3000");
+
+        socket.on('notification', function(res){
+
+           alert('le temp reel avec socket.io '+ res);
+
+        })
+     </script>
+
+  </body>
+
+</html>
